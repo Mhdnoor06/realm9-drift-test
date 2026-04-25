@@ -1,0 +1,39 @@
+terraform {
+  required_version = ">= 1.0"
+}
+
+variable "environment" {
+  type    = string
+  default = "dev"
+}
+
+variable "project_name" {
+  type    = string
+  default = "drift-test"
+}
+
+resource "aws_s3_bucket" "starter_bucket" {
+  bucket = "realm9-drift-test-${var.environment}"
+  tags = {
+    Name        = "starter-bucket"
+    Environment = var.environment
+    Project     = var.project_name
+  }
+}
+
+resource "aws_dynamodb_table" "drift_probe" {
+  name         = "realm9-drift-probe-${var.environment}"
+  billing_mode = "PAY_PER_REQUEST"
+  hash_key     = "id"
+
+  attribute {
+    name = "id"
+    type = "S"
+  }
+
+  tags = {
+    Name        = "drift-probe"
+    Environment = var.environment
+    Project     = var.project_name
+  }
+}
