@@ -38,3 +38,4 @@ resource "aws_dynamodb_table" "drift_probe" {
   }
 }
 # drift-retest 2026-04-25T19:43:47
+# drift-retest-fix 2026-04-25T19:44:51
