@@ -21,6 +21,16 @@ resource "aws_s3_bucket" "starter_bucket" {
   }
 }
 
+resource "aws_sqs_queue" "drift_probe_queue" {
+  name = "realm9-drift-queue-${var.environment}"
+
+  tags = {
+    Name        = "drift-probe-queue"
+    Environment = var.environment
+    Project     = var.project_name
+  }
+}
+
 resource "aws_dynamodb_table" "drift_probe" {
   name         = "realm9-drift-probe-${var.environment}"
   billing_mode = "PAY_PER_REQUEST"
