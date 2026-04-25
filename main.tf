@@ -37,3 +37,4 @@ resource "aws_dynamodb_table" "drift_probe" {
     Project     = var.project_name
   }
 }
+# drift-retest 2026-04-25T19:43:47
